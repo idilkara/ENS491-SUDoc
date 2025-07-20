@@ -5,7 +5,10 @@ subgraph RAG_pipeline
     A[User submits a question] 
     A --> O         
     A --> B   
-    M[combine and create request
+    M[combine, condense 
+        the query using 
+        history and context create 
+        request for completions 
     to LLM ] --> Z
     E --> M
     I --> M
@@ -13,35 +16,51 @@ subgraph RAG_pipeline
 
     subgraph Response_Generation
         
-        Z[LLM: Generates Context-aware Response] 
-        N[Output Answer, Reference to Chunks, Metadata]
+        Z[LLM: Generates 
+        Context-aware Response] 
+        N[Output Answer, 
+        Reference to Chunks, 
+        Metadata]
         Z --> N 
 
     end 
 
     subgraph Session_Context
         
-        O[Previous Session Context: Chat History in MongoDB] 
-        E[Prepare history buffer by token count]
+        O[Previous Session Context: 
+        using the 
+            Chat History in MongoDB 
+            up to 
+            last 3 messages ]  
+
+        E[Trim history 
+            buffer by token count]
+
         O --> E
         
     end
 
     subgraph Query_Analysis
         direction TB
-        B[Structural analysis: Lang Detection & Token Count] --> 
-        C[Semantic-aware Analysis via LangChain]
+        B[Structural analysis: 
+        Language Detection 
+            & Token Count]
     end
 
     subgraph Chunk_Retrieval
         direction TB
-        C --> H[MMR Search for Top Chunks in ChromaDB] --> 
-        I[Re-rank with FlashRank: Cross Encoder]
+        B --> H[Similarity Search for 
+        Top Chunks in ChromaDB] --> 
+        I[Re-rank with FlashRank:
+             Cross Encoder 
+            returns 3 chunks]
+
     end
 
     subgraph Prompt_Template
         direction TB
-        L[Language-Specific Rules & Instructions]
+        L[Language-Specific
+         Rules & Instructions]
     end
 
 end
