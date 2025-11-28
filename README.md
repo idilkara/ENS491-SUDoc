@@ -1,7 +1,7 @@
 ﻿# RAG Document Manager - Sabanci University ENS491/2 Project
 
 ## Overview
-A Retrieval-Augmented Generation (RAG) based document management system that enables intelligent document processing, semantic search, and AI-powered chat interactions. This project was developed as part of the ENS491 course at Sabanci University.
+A Retrieval-Augmented Generation (RAG) based document management system that enables intelligent document processing, semantic search, and AI-powered chat interactions. This project was developed as part of the ENS491/2 (Graaduation Project) course at Sabanci University.
 
 ### For detailed documentations about components go to [documentations](documentation) folder 
 
@@ -360,4 +360,5 @@ The default configuration in `config.py` is set up for use within the Dolap serv
 
 ### Nginx Configuration 
 The Nginx configuration is located in `backend/nginx/nginx.conf`. This configuration handles routing and serving the frontend static files.
+
 
